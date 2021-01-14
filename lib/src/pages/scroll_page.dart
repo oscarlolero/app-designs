@@ -24,20 +24,24 @@ class ScrollPage extends StatelessWidget {
     return Stack(
       children: [
         _backgroundColor(),
-        Center(
-          child: RaisedButton(
-            padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-            shape: StadiumBorder(),
-            color: Colors.blue,
-            onPressed: () {},
-            child: Text(
-              'Bienvenido',
-              style: TextStyle(color: Colors.white, fontSize: 19),
-            ),
-          ),
-        ),
+        _welcomeButton(),
       ],
     );
+  }
+
+  Center _welcomeButton() {
+    return Center(
+        child: RaisedButton(
+          padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+          shape: StadiumBorder(),
+          color: Colors.blue,
+          onPressed: () {},
+          child: Text(
+            'Bienvenido',
+            style: TextStyle(color: Colors.white, fontSize: 19),
+          ),
+        ),
+      );
   }
 
   Widget _texts() {
