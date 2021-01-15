@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ButtonsPage extends StatelessWidget {
@@ -14,6 +15,7 @@ class ButtonsPage extends StatelessWidget {
             child: Column(
               children: [
                 _titles(),
+                _roundedButtons(),
               ],
             ),
           ),
@@ -47,11 +49,10 @@ class ButtonsPage extends StatelessWidget {
   Widget _buildPersonalizedBottomNavigationBar(BuildContext context) {
     return Theme(
       data: Theme.of(context).copyWith(
-        canvasColor: Color.fromRGBO(55, 57, 84, 1.0),
-        primaryColor: Colors.pinkAccent,
-        textTheme: Theme.of(context).textTheme
-          .copyWith(caption: TextStyle(color: Color.fromRGBO(116, 117, 152, 1.0)))
-      ),
+          canvasColor: Color.fromRGBO(55, 57, 84, 1.0),
+          primaryColor: Colors.pinkAccent,
+          textTheme: Theme.of(context).textTheme.copyWith(
+              caption: TextStyle(color: Color.fromRGBO(116, 117, 152, 1.0)))),
       child: BottomNavigationBar(
         showSelectedLabels: false,
         showUnselectedLabels: false,
@@ -138,6 +139,71 @@ class ButtonsPage extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _roundedButtons() {
+    return Table(
+      children: [
+        TableRow(
+            children: [
+              _buildRoundedButton( Colors.blue, Icons.border_all, 'General' ),
+              _buildRoundedButton( Colors.purpleAccent, Icons.directions_bus, 'Bus' ),
+            ]
+        ),
+        TableRow(
+            children: [
+              _buildRoundedButton( Colors.pinkAccent, Icons.shop, 'Buy' ),
+              _buildRoundedButton( Colors.orange, Icons.insert_drive_file, 'File' ),
+            ]
+        ),
+        TableRow(
+            children: [
+              _buildRoundedButton( Colors.blueAccent, Icons.movie_filter, 'Entertaiment' ),
+              _buildRoundedButton( Colors.green, Icons.cloud, 'Grocery' ),
+            ]
+        ),
+        TableRow(
+            children: [
+              _buildRoundedButton( Colors.red, Icons.collections, 'Photos' ),
+              _buildRoundedButton( Colors.teal, Icons.help_outline, 'General' ),
+            ]
+        )
+      ],
+    );
+  }
+
+  Widget _buildRoundedButton(Color color, IconData icon, String text) {
+    return Padding(
+      padding: EdgeInsets.all(15),
+      child: ClipRRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur( sigmaX: 10.0, sigmaY: 10.0 ),
+          child: Container(
+            height: 180.0,
+            decoration: BoxDecoration(
+                color: Color.fromRGBO(62, 66, 107, 0.7),
+                borderRadius: BorderRadius.circular(20)),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                SizedBox(height: 5.0),
+                CircleAvatar(
+                  radius: 35.0,
+                  backgroundColor: color,
+                  child: Icon(
+                    icon,
+                    color: Colors.white,
+                    size: 30.0,
+                  ),
+                ),
+                Text(text, style: TextStyle(color: Colors.pinkAccent),),
+                SizedBox(height: 5.0)
+              ],
+            ),
+          ),
         ),
       ),
     );

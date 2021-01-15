@@ -8,7 +8,7 @@ class ScrollPage extends StatelessWidget {
         scrollDirection: Axis.vertical,
         children: [
           _page1(),
-          _page2(),
+          _page2(context),
         ],
       ),
     );
@@ -20,28 +20,54 @@ class ScrollPage extends StatelessWidget {
     );
   }
 
-  Widget _page2() {
+  Widget _page2(BuildContext context) {
     return Stack(
       children: [
         _backgroundColor(),
-        _welcomeButton(),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _complexButton(context),
+            SizedBox(height: 20),
+            _basicButton(context),
+          ],
+        ),
       ],
     );
   }
 
-  Center _welcomeButton() {
+  Widget _complexButton(BuildContext context) {
     return Center(
-        child: RaisedButton(
-          padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-          shape: StadiumBorder(),
-          color: Colors.blue,
-          onPressed: () {},
-          child: Text(
-            'Bienvenido',
-            style: TextStyle(color: Colors.white, fontSize: 19),
-          ),
+      child: RaisedButton(
+        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+        shape: StadiumBorder(),
+        color: Colors.blue,
+        onPressed: () {
+          Navigator.of(context).pushNamed('buttons');
+        },
+        child: Text(
+          'Complex',
+          style: TextStyle(color: Colors.white, fontSize: 19),
         ),
-      );
+      ),
+    );
+  }
+
+  Widget _basicButton(BuildContext context) {
+    return Center(
+      child: RaisedButton(
+        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+        shape: StadiumBorder(),
+        color: Colors.blue,
+        onPressed: () {
+          Navigator.of(context).pushNamed('basic');
+        },
+        child: Text(
+          'Basic',
+          style: TextStyle(color: Colors.white, fontSize: 19),
+        ),
+      ),
+    );
   }
 
   Widget _texts() {
